@@ -1,10 +1,10 @@
 import html
 LOGO = """<svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15.5" fill="none" stroke="#1e2528" stroke-width="1.4"/><circle cx="17" cy="17" r="9.5" fill="none" stroke="#3d5a68" stroke-width="1.2"/><circle cx="17" cy="17" r="4" fill="#b0553a"/><path d="M17 1.5v6M17 26.5v6M1.5 17h6M26.5 17h6" stroke="#1e2528" stroke-width="1.2"/></svg>"""
-NAV = [("index.html","Home"),("committee.html","Committee"),("events.html","Events"),("resources.html","Resources"),("join.html","Join")]
+NAV = [("/","Home"),("/committee","Committee"),("/events","Events"),("/resources","Resources"),("/join","Join")]
 def navhtml(fname):
     out=[]
     for h,t in NAV:
-        cur = ' aria-current="page"' if h==fname else ''
+        cur = ' aria-current="page"' if h==('/' if fname=='index.html' else '/'+fname[:-5]) else ''
         out.append('<a href="%s"%s>%s</a>' % (h,cur,t))
     return "".join(out)
 def page(fname, title, body, desc):
@@ -19,7 +19,7 @@ def page(fname, title, body, desc):
 </head>
 <body>
 <header class="site"><div class="wrap">
-  <a class="brand" href="index.html">%s<span><span class="name">GPS <span>&amp;</span> Orgs</span><span class="tag">Geography · Place · Space · Organisations</span></span></a>
+  <a class="brand" href="/">%s<span><span class="name">GPS <span>&amp;</span> Orgs</span><span class="tag">Geography · Place · Space · Organisations</span></span></a>
   <nav class="main" aria-label="Main">%s</nav>
 </div></header>
 <main class="wrap">
@@ -27,7 +27,7 @@ def page(fname, title, body, desc):
 </main>
 <footer class="site"><div class="wrap">
   <div>GPS &amp; Orgs Community · Geography, Place, Space and Organisations</div>
-  <div><a href="join.html">Join the mailing list</a> · <a href="mailto:hello@gpsorgs.com">hello@gpsorgs.com</a></div>
+  <div><a href="/join">Join the mailing list</a> · <a href="mailto:hello@gpsorgs.com">hello@gpsorgs.com</a></div>
 </div></footer>
 </body>
 </html>
@@ -38,7 +38,7 @@ pages["index.html"] = ("Home", "A community of researchers exploring organisatio
   <div class="kicker">A research community</div>
   <h1>Organisations, in place.</h1>
   <p class="lede">A community of researchers exploring how organisations are shaped by, and shape, the geographies, places and spaces they inhabit.</p>
-  <div class="actions"><a class="btn accent" href="join.html">Join the mailing list</a><a class="btn" href="events.html">Events</a></div>
+  <div class="actions"><a class="btn accent" href="/join">Join the mailing list</a><a class="btn" href="/events">Events</a></div>
 </section>
 <hr class="rule">
 <section class="band">
@@ -48,9 +48,9 @@ pages["index.html"] = ("Home", "A community of researchers exploring organisatio
 </section>
 <section class="band">
   <div class="grid">
-    <div class="card"><h3>Meet</h3><p>Events that bring people together around the work: a day, a seminar, a walk. <a href="events.html">See events</a>.</p></div>
-    <div class="card"><h3>Read</h3><p>A growing set of readings, calls and related communities. <a href="resources.html">Resources</a>.</p></div>
-    <div class="card"><h3>Belong</h3><p>The mailing list is the front door for now. <a href="join.html">Join</a>.</p></div>
+    <div class="card"><h3>Meet</h3><p>Events that bring people together around the work: a day, a seminar, a walk. <a href="/events">See events</a>.</p></div>
+    <div class="card"><h3>Read</h3><p>A growing set of readings, calls and related communities. <a href="/resources">Resources</a>.</p></div>
+    <div class="card"><h3>Belong</h3><p>The mailing list is the front door for now. <a href="/join">Join</a>.</p></div>
   </div>
 </section>
 """)
@@ -74,14 +74,14 @@ pages["committee.html"] = ("Committee", "The steering committee and representati
     <div class="person"><div class="who placeholder">Name to add</div><div class="where placeholder">Institution</div><div class="role">Representative</div></div>
     <div class="person"><div class="who placeholder">Name to add</div><div class="where placeholder">Institution</div><div class="role">Representative</div></div>
   </div>
-  <p class="small muted" style="margin-top:28px">Want to represent your institution? <a href="join.html">Get in touch</a>.</p>
+  <p class="small muted" style="margin-top:28px">Want to represent your institution? <a href="/join">Get in touch</a>.</p>
 </section>
 """)
 pages["events.html"] = ("Events", "Upcoming and past events of the GPS & Orgs Community.", """
 <section class="page-title"><h1>Events</h1><p class="lede">Where the community meets.</p></section>
 <section class="band">
   <h2>Upcoming</h2>
-  <p class="muted">The next event will be announced to the mailing list first. <a href="join.html">Join</a> to hear about it.</p>
+  <p class="muted">The next event will be announced to the mailing list first. <a href="/join">Join</a> to hear about it.</p>
   <h2>Past</h2>
   <div class="event">
     <div class="when">7 Sept 2026<small>Full day</small></div>
