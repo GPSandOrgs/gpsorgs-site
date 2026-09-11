@@ -128,9 +128,9 @@ pages["resources.html"] = ("Resources", "Announcements, calls, readings and rela
   <h2>Related networks</h2>
   <p class="muted">Existing conversations this community builds on and stays in touch with.</p>
   <ul class="linklist">
-    <li><strong>EGOS Standing Working Group 07</strong>, Organizations and Place-Based Communities. Sub-themes at the annual EGOS Colloquium.</li>
+    <li><strong><a href="https://www.egos.org/SWGs/SWG-07">EGOS Standing Working Group 07</a></strong>, Organizations and Place-Based Communities (2025 to 2028). Sub-themes at the annual EGOS Colloquium.</li>
     <li><strong>AOM PDW series on Organisational Spaces</strong>. Professional development workshops at the Academy of Management annual meeting.</li>
-    <li><strong>RGCS</strong>, the Research Group on Collaborative Spaces, and its annual symposium.</li>
+    <li><strong><a href="https://rgcs-owee.org/">RGCS</a></strong>, the Research Group on Collaborative Spaces, and its annual symposium.</li>
     <li><strong><a href="https://www.twrnetwork.org">TWR Network</a></strong>, the Transdisciplinary Workplace Research network: scholars and practitioners across disciplines working on workplaces and wellbeing, with a biennial conference.</li>
   </ul>
 </section>
