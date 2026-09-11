@@ -94,7 +94,8 @@ pages["resources.html"] = ("Resources", "Readings, calls and related communities
 pages["join.html"] = ("Join", "Join the GPS & Orgs Community mailing list.", """
 <section class="page-title"><h1>Join</h1><p class="lede">For now, the community lives on its mailing list. Sign up to hear about events, calls and what members are working on.</p></section>
 <section class="band">
-  <form class="join" action="#" method="post" data-note="Form target not yet connected. Set action to the mailing list endpoint.">
+  <form class="join" action="/api/join" method="post">
+    <div style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
     <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" autocomplete="name" required></div>
     <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
     <div class="field"><label for="affiliation">Institution or affiliation</label><input id="affiliation" name="affiliation" type="text" autocomplete="organization"></div>
@@ -103,6 +104,14 @@ pages["join.html"] = ("Join", "Join the GPS & Orgs Community mailing list.", """
     <button class="btn accent" type="submit">Join the mailing list</button>
   </form>
 </section>
+""")
+pages["joined.html"] = ("You're on the list", "Thanks for joining the GPS & Orgs Community mailing list.", """
+<section class="page-title"><h1>You're on the list.</h1><p class="lede">Thank you. You will hear from us when there is something worth hearing about: an event, a call, a conversation starting.</p>
+<div class="actions"><a class="btn" href="/">Back to the front page</a><a class="btn" href="/events">Events</a></div></section>
+""")
+pages["join-problem.html"] = ("Something went wrong", "The sign up could not be saved.", """
+<section class="page-title"><h1>That did not go through.</h1><p class="lede">Something stopped the sign up from saving. Please check the name and email fields and try again in a moment.</p>
+<div class="actions"><a class="btn accent" href="/join">Try again</a></div></section>
 """)
 for f,(t,d,b) in pages.items():
     open(f,"w").write(page(f,t,b,d))
