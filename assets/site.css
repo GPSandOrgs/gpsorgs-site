@@ -2,15 +2,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600&display=swap');
 
 :root {
-  --paper: #f6f2ea;
-  --paper-2: #efe9dd;
-  --ink: #1e2528;
-  --ink-2: #4a545a;
-  --ink-3: #7c8489;
-  --rule: #d9d1c3;
-  --terracotta: #b0553a;
-  --slate: #3d5a68;
-  --moss: #6b7b5e;
+  --paper: #f3f3ed;
+  --paper-2: #e9eae1;
+  --ink: #1d2624;
+  --ink-2: #47544f;
+  --ink-3: #78857f;
+  --rule: #d3d8cc;
+  --terracotta: #4f6b52;   /* accent 1: moss green (variable name kept for brevity) */
+  --slate: #2f5d6b;        /* accent 2: deep lake blue */
+  --moss: #6f8a6a;
   --max: 1080px;
   --serif: "Newsreader", Georgia, "Times New Roman", serif;
   --sans: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
@@ -25,7 +25,7 @@ body {
 /* faint contour lines, like a topographic sheet */
 body::before {
   content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: .55;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='900' height='900' viewBox='0 0 900 900' fill='none' stroke='%23d9d1c3' stroke-width='1'><path d='M-50 120c120-60 240-40 330 20s190 90 300 40 220-90 370-30'/><path d='M-50 200c120-60 250-30 340 30s200 90 310 40 220-100 350-40'/><path d='M-50 290c130-50 250-20 340 40s210 80 320 30 210-90 340-40'/><path d='M-50 640c140-70 260-30 350 30s200 100 320 40 220-110 330-50'/><path d='M-50 730c140-70 270-20 350 40s210 100 330 40 210-100 320-50'/><path d='M-50 820c140-60 270-10 350 50s210 90 330 30 210-90 320-40'/><circle cx='690' cy='470' r='60'/><circle cx='690' cy='470' r='105'/><circle cx='690' cy='470' r='150'/><circle cx='210' cy='500' r='45'/><circle cx='210' cy='500' r='85'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='900' height='900' viewBox='0 0 900 900' fill='none' stroke='%23cdd6c9' stroke-width='1'><path d='M-50 120c120-60 240-40 330 20s190 90 300 40 220-90 370-30'/><path d='M-50 200c120-60 250-30 340 30s200 90 310 40 220-100 350-40'/><path d='M-50 290c130-50 250-20 340 40s210 80 320 30 210-90 340-40'/><path d='M-50 640c140-70 260-30 350 30s200 100 320 40 220-110 330-50'/><path d='M-50 730c140-70 270-20 350 40s210 100 330 40 210-100 320-50'/><path d='M-50 820c140-60 270-10 350 50s210 90 330 30 210-90 320-40'/><circle cx='690' cy='470' r='60'/><circle cx='690' cy='470' r='105'/><circle cx='690' cy='470' r='150'/><circle cx='210' cy='500' r='45'/><circle cx='210' cy='500' r='85'/></svg>");
   background-size: 900px 900px;
 }
 a { color: var(--slate); text-decoration: none; border-bottom: 1px solid var(--rule); transition: border-color .15s, color .15s; }
@@ -62,13 +62,13 @@ nav.main a[aria-current="page"] { color: var(--terracotta); }
 section.band { padding: 16px 0 40px; }
 .rule { border: 0; border-top: 1px solid var(--rule); margin: 40px 0; }
 .grid { display: grid; gap: 28px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-.card { background: rgba(255,255,255,.55); border: 1px solid var(--rule); border-radius: 10px; padding: 22px 22px 18px; }
+.card { background: rgba(255,255,255,.5); border: 1px solid var(--rule); border-radius: 10px; padding: 22px 22px 18px; }
 .card h3 { margin-top: 0; }
 .card p:last-child { margin-bottom: 0; }
 .btn { display: inline-block; border: 1px solid var(--ink); border-radius: 999px; padding: 10px 20px; font-weight: 500; color: var(--ink); }
 .btn:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 .btn.accent { background: var(--terracotta); border-color: var(--terracotta); color: #fff; }
-.btn.accent:hover { background: #944630; border-color: #944630; }
+.btn.accent:hover { background: #3d553f; border-color: #3d553f; }
 .actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 22px; }
 
 /* people */

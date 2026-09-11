@@ -1,5 +1,5 @@
 import html
-LOGO = """<svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15.5" fill="none" stroke="#1e2528" stroke-width="1.4"/><circle cx="17" cy="17" r="9.5" fill="none" stroke="#3d5a68" stroke-width="1.2"/><circle cx="17" cy="17" r="4" fill="#b0553a"/><path d="M17 1.5v6M17 26.5v6M1.5 17h6M26.5 17h6" stroke="#1e2528" stroke-width="1.2"/></svg>"""
+LOGO = """<svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15.5" fill="none" stroke="#1d2624" stroke-width="1.4"/><circle cx="17" cy="17" r="9.5" fill="none" stroke="#2f5d6b" stroke-width="1.2"/><circle cx="17" cy="17" r="4" fill="#4f6b52"/><path d="M17 1.5v6M17 26.5v6M1.5 17h6M26.5 17h6" stroke="#1d2624" stroke-width="1.2"/></svg>"""
 NAV = [("/","Home"),("/committee","Committee"),("/events","Events"),("/resources","Resources"),("/join","Join")]
 def navhtml(fname):
     out=[]
@@ -27,7 +27,7 @@ def page(fname, title, body, desc):
 </main>
 <footer class="site"><div class="wrap">
   <div>GPS &amp; Orgs Community · Geography, Place, Space and Organisations</div>
-  <div><a href="/join">Join the mailing list</a> · <a href="mailto:hello@gpsorgs.com">hello@gpsorgs.com</a></div>
+  <div><a href="/join">Join the mailing list</a></div>
 </div></footer>
 </body>
 </html>
@@ -36,15 +36,15 @@ pages = {}
 pages["index.html"] = ("Home", "A community of researchers exploring organisations in relation to geography, place and space.", """
 <section class="hero">
   <div class="kicker">A research community</div>
-  <h1>Organisations, in place.</h1>
-  <p class="lede">A community of researchers exploring how organisations are shaped by, and shape, the geographies, places and spaces they inhabit.</p>
+  <h1>Connecting geography, place, space and organisations.</h1>
+  <p class="lede">A community of researchers whose work meets where organisations and the spatial disciplines overlap, and who want those conversations to talk to one another.</p>
   <div class="actions"><a class="btn accent" href="/join">Join the mailing list</a><a class="btn" href="/events">Events</a></div>
 </section>
 <hr class="rule">
 <section class="band">
   <h2>What this is</h2>
-  <p>We are an interdisciplinary group of academic researchers working at the meeting point of organisation studies and the spatial disciplines: geography, urban studies, architecture, the sociology of place. Our shared question is how the where of organising matters: the buildings, cities, regions, landscapes and digital spaces in which organisations take form.</p>
-  <p>The community began with a one day event at UCL School of Management on 7 September 2026, <em>Space, Place, Geography and Organisations: Exploring Connections</em>, and grew out of conversations at EGOS and the Academy of Management. It is early, deliberately open, and shaped by whoever turns up.</p>
+  <p>Research on organisations and geography, place and space runs in many conversations at once: organisational space and spatial practice, proximity and the built environment, place and meaning, cities and regions, infrastructure, distributed and virtual work. They use different vocabularies, work at different scales, and reach well beyond management and organisation studies into architecture, urban planning, geography and sociology. Often they do not meet.</p>
+  <p>This community exists to connect them. It grew out of conversations at EGOS and the Academy of Management and took shape at a first event at UCL School of Management on 7 September 2026. It is early, deliberately open, and will be shaped by the people who join it.</p>
 </section>
 <section class="band">
   <div class="grid">
@@ -58,23 +58,9 @@ pages["committee.html"] = ("Committee", "The steering committee and representati
 <section class="page-title"><h1>Committee</h1><p class="lede">The people keeping the community moving.</p></section>
 <section class="band">
   <h2>Steering committee</h2>
-  <div class="people">
-    <div class="person"><div class="who">Jen Rhymer</div><div class="where">UCL School of Management</div><div class="role">Steering</div></div>
-    <div class="person"><div class="who placeholder">Name to add</div><div class="where placeholder">Institution</div><div class="role">Steering</div></div>
-    <div class="person"><div class="who placeholder">Name to add</div><div class="where placeholder">Institution</div><div class="role">Steering</div></div>
-    <div class="person"><div class="who placeholder">Name to add</div><div class="where placeholder">Institution</div><div class="role">Steering</div></div>
-  </div>
+  <p class="muted">To be announced.</p>
   <h2>Representatives</h2>
-  <p class="muted">Representatives are the community's points of contact at their institutions and disciplines.</p>
-  <div class="people">
-    <div class="person"><div class="who placeholder">Name to add</div><div class="where placeholder">Institution</div><div class="role">Representative</div></div>
-    <div class="person"><div class="who placeholder">Name to add</div><div class="where placeholder">Institution</div><div class="role">Representative</div></div>
-    <div class="person"><div class="who placeholder">Name to add</div><div class="where placeholder">Institution</div><div class="role">Representative</div></div>
-    <div class="person"><div class="who placeholder">Name to add</div><div class="where placeholder">Institution</div><div class="role">Representative</div></div>
-    <div class="person"><div class="who placeholder">Name to add</div><div class="where placeholder">Institution</div><div class="role">Representative</div></div>
-    <div class="person"><div class="who placeholder">Name to add</div><div class="where placeholder">Institution</div><div class="role">Representative</div></div>
-  </div>
-  <p class="small muted" style="margin-top:28px">Want to represent your institution? <a href="/join">Get in touch</a>.</p>
+  <p class="muted">Representatives will be the community's points of contact at their institutions and across disciplines. To be announced.</p>
 </section>
 """)
 pages["events.html"] = ("Events", "Upcoming and past events of the GPS & Orgs Community.", """
@@ -88,7 +74,8 @@ pages["events.html"] = ("Events", "Upcoming and past events of the GPS & Orgs Co
     <div>
       <h3>Space, Place, Geography and Organisations: Exploring Connections</h3>
       <div class="where">UCL School of Management, London</div>
-      <p>The founding meeting. A day of talks, discussion and an academic workshop bringing together researchers from organisation studies and the spatial disciplines to map shared questions and set the community in motion.</p>
+      <p>The first meeting. A day bringing together researchers from organisation studies and the spatial disciplines: a panel mapping the research areas, roundtables on a shared phenomenon, a panel on methods and data sources, and a closing session on future research agendas and the community itself.</p>
+      <p class="small muted">Organised by Jen Rhymer (UCL), Alessandra Migliore (Politecnico di Milano) and Santi Furnari (Bayes Business School).</p>
     </div>
   </div>
 </section>
@@ -99,10 +86,9 @@ pages["resources.html"] = ("Resources", "Readings, calls and related communities
   <div class="grid">
     <div class="card"><h3>Readings</h3><p class="placeholder">A short starter list of foundational and recent work at the intersection of organisations and space, place and geography. Coming soon.</p></div>
     <div class="card"><h3>Calls and tracks</h3><p class="placeholder">Conference sub-themes, special issues and workshops relevant to the community, including at EGOS and the Academy of Management. Coming soon.</p></div>
-    <div class="card"><h3>Related communities</h3><p class="placeholder">Groups, networks and seminar series we are in conversation with. Coming soon.</p></div>
+    <div class="card"><h3>Related conversations</h3><p>Some of the existing conversations this community builds on:</p><p>EGOS Standing Working Group 07, Organizations and Place-Based Communities<br>The AOM PDW series on Organisational Spaces<br>RGCS, the Research Group on Collaborative Spaces, and its annual symposium</p></div>
     <div class="card"><h3>From our events</h3><p class="placeholder">Slides, notes and summaries from community events, starting with 7 September 2026. Coming soon.</p></div>
   </div>
-  <p class="small muted" style="margin-top:32px">Have something to add? <a href="mailto:hello@gpsorgs.com">Send it our way</a>.</p>
 </section>
 """)
 pages["join.html"] = ("Join", "Join the GPS & Orgs Community mailing list.", """
@@ -115,7 +101,6 @@ pages["join.html"] = ("Join", "Join the GPS & Orgs Community mailing list.", """
     <div class="field"><label for="interests">What are you working on? <span class="muted">(optional)</span></label><textarea id="interests" name="interests" rows="3"></textarea></div>
     <div class="field"><label class="check"><input type="checkbox" name="consent" required><span>I would like to receive occasional emails from the GPS &amp; Orgs Community. Unsubscribe any time.</span></label></div>
     <button class="btn accent" type="submit">Join the mailing list</button>
-    <p class="hint" style="margin-top:14px">Prefer email? Write to <a href="mailto:hello@gpsorgs.com">hello@gpsorgs.com</a>.</p>
   </form>
 </section>
 """)
