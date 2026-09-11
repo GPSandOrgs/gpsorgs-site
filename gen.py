@@ -59,9 +59,9 @@ pages["committee.html"] = ("Committee", "The steering committee and representati
 <section class="band">
   <h2>Steering committee</h2>
   <div class="people">
-    <div class="person"><div class="who">Alessandra Migliore</div><div class="where">Politecnico di Milano</div><div class="role">Steering</div></div>
-    <div class="person"><div class="who">Santi Furnari</div><div class="where">Bayes Business School</div><div class="role">Steering</div></div>
-    <div class="person"><div class="who">Jen Rhymer</div><div class="where">UCL School of Management</div><div class="role">Steering</div></div>
+    <div class="person"><div class="who">Alessandra Migliore</div><div class="where">Politecnico di Milano</div></div>
+    <div class="person"><div class="who">Santi Furnari</div><div class="where">Bayes Business School</div></div>
+    <div class="person"><div class="who">Jen Rhymer</div><div class="where">UCL School of Management</div></div>
   </div>
   <p class="muted" style="margin-top:22px">The steering committee is growing. Further members will be announced as the community takes shape.</p>
   <h2>Representatives</h2>
@@ -108,6 +108,7 @@ pages["resources.html"] = ("Resources", "Announcements, calls, readings and rela
 <section class="band" id="readings">
   <h2>Readings</h2>
   <p class="muted">A starter shelf, organised by the provisional map of research conversations drawn up at the 7 September event. The map is a working device, not a taxonomy; the boundaries are exactly what the community is here to question.</p>
+  <h3 class="shelf-cat">Areas</h3>
   <div class="shelf">
     <div class="shelf-item"><h3>Organisational space and spatial practice</h3><p>Space as experienced, practised and socially produced, including how organisational power relations take material form.</p><ul><li>Taylor, S. and Spicer, A. (2007). Time for space: A narrative review of research on organizational spaces. <em>International Journal of Management Reviews</em>.</li></ul></div>
     <div class="shelf-item"><h3>Proximity, microgeography and the built environment</h3><p>Enclosures, barriers, layout and ambient surroundings that shape interaction and behaviour.</p><ul><li>Elsbach, K. D. and Pratt, M. G. (2007). The physical environment in organizations. <em>Academy of Management Annals</em>.</li></ul></div>
@@ -115,6 +116,11 @@ pages["resources.html"] = ("Resources", "Announcements, calls, readings and rela
     <div class="shelf-item"><h3>Cities, regions and neighbourhoods</h3><p>Local communities, cities, regions and ecosystems that shape organisational practices, opportunities and outcomes.</p><ul><li>Marquis, C. and Battilana, J. (2009). Acting globally but thinking locally? The enduring influence of local communities on organizations. <em>Research in Organizational Behavior</em>.</li></ul></div>
     <div class="shelf-item"><h3>Infrastructure and meso-geography</h3><p>Material and connective systems that enable, organise and constrain activity across places and scales.</p><ul><li class="placeholder">Starter references to be added.</li></ul></div>
     <div class="shelf-item"><h3>Distributed and virtual spaces</h3><p>Organising across dispersed, hybrid and digitally mediated spaces, shaped by technologies and changing patterns of presence and mobility.</p><ul><li>Mazmanian, M., Orlikowski, W. J. and Yates, J. (2013). The autonomy paradox: The implications of mobile email devices for knowledge professionals. <em>Organization Science</em>.</li><li>Leonardi, P. M. (2021). COVID-19 and the new technologies of organizing: Digital exhaust, digital footprints, and artificial intelligence in the wake of remote work. <em>Journal of Management Studies</em>.</li></ul></div>
+  </div>
+  <h3 class="shelf-cat">Methods</h3>
+  <div class="shelf">
+    <div class="shelf-item"><h3>Space syntax</h3><p>Analysing the configuration of buildings and cities to show how spatial layout shapes movement, encounter and interaction.</p><ul><li>Hillier, B. and Hanson, J. (1984). <em>The Social Logic of Space</em>. Cambridge University Press.</li><li>Hillier, B. (1996). <em>Space is the Machine: A Configurational Theory of Architecture</em>. Cambridge University Press.</li><li>Sailer, K. and McCulloh, I. (2012). Social networks and spatial configuration: How office layouts drive social interaction. <em>Social Networks</em>.</li></ul></div>
+    <div class="shelf-item"><h3 class="placeholder">Further methods to add</h3><p class="placeholder">Mapping and GIS, ethnographies of place, spatial network analysis, and more, as members contribute.</p></div>
   </div>
 </section>
 
@@ -125,6 +131,7 @@ pages["resources.html"] = ("Resources", "Announcements, calls, readings and rela
     <li><strong>EGOS Standing Working Group 07</strong>, Organizations and Place-Based Communities. Sub-themes at the annual EGOS Colloquium.</li>
     <li><strong>AOM PDW series on Organisational Spaces</strong>. Professional development workshops at the Academy of Management annual meeting.</li>
     <li><strong>RGCS</strong>, the Research Group on Collaborative Spaces, and its annual symposium.</li>
+    <li><strong><a href="https://www.twrnetwork.org">TWR Network</a></strong>, the Transdisciplinary Workplace Research network: scholars and practitioners across disciplines working on workplaces and wellbeing, with a biennial conference.</li>
   </ul>
 </section>
 """)

@@ -127,3 +127,5 @@ footer.site a { color: var(--ink-2); }
 .shelf-item li { margin-bottom: .45em; }
 .linklist { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--rule); max-width: 62ch; }
 .linklist li { padding: 12px 0; border-bottom: 1px solid var(--rule); }
+.shelf-cat { font-family: var(--sans); font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; color: var(--terracotta); font-weight: 600; margin: 2.2em 0 .4em; }
+.shelf-cat + .shelf { margin-bottom: 8px; }
