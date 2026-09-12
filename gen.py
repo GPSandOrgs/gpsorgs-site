@@ -1,4 +1,17 @@
-import html
+import html, re
+
+import urllib.parse
+def scholarize(block):
+    """Append a Google Scholar search link to every reference in a readings block, keyed on the title."""
+    def link(m):
+        li = m.group(1)
+        t = re.search(r"\(\d{4}[a-z]?\)\. (.+?)\. <em>", li)          # article: title before the journal
+        if not t: t = re.search(r"\(\d{4}[a-z]?\)\. <em>(.+?)</em>", li)  # book: title is the italic part
+        if not t: return m.group(0)
+        title = html.unescape(re.sub(r"<[^>]+>", "", t.group(1)))
+        q = urllib.parse.quote_plus('"' + title + '"')
+        return '<li>%s <a class="scholar" href="https://scholar.google.com/scholar?q=%s" target="_blank" rel="noopener">Google Scholar</a></li>' % (li, q)
+    return re.sub(r"<li>(.*?)</li>", link, block, flags=re.S)
 LOGO = """<svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15.5" fill="none" stroke="#1d2624" stroke-width="1.4"/><circle cx="17" cy="17" r="9.5" fill="none" stroke="#2f5d6b" stroke-width="1.2"/><circle cx="17" cy="17" r="4" fill="#4f6b52"/><path d="M17 1.5v6M17 26.5v6M1.5 17h6M26.5 17h6" stroke="#1d2624" stroke-width="1.2"/></svg>"""
 NAV = [
     ("/", "Home", None),
@@ -220,6 +233,7 @@ pages["contact-problem.html"] = ("Something went wrong", "The message could not 
 <section class="page-title"><h1>That did not go through.</h1><p class="lede">Something stopped the message from sending. Please check the fields and try again in a moment, or email us directly at <a class="mail" data-u="hello" data-d="gpsorgs.com"></a>.</p>
 <div class="actions"><a class="btn accent" href="/contact">Try again</a></div></section>
 """)
+pages["readings.html"] = (pages["readings.html"][0], pages["readings.html"][1], scholarize(pages["readings.html"][2]))
 for f,(t,d,b) in pages.items():
     open(f,"w").write(page(f,t,b,d))
 print("pages:", ", ".join(pages))

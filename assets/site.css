@@ -62,6 +62,7 @@ details.menu[open] summary, details.menu summary:hover { background: var(--paper
 details.menu summary.current { color: var(--terracotta); }
 details.menu .drop { position: absolute; top: calc(100% + 6px); left: 0; min-width: 210px; background: var(--paper); border: 1px solid var(--rule); border-radius: 10px; padding: 6px; box-shadow: 0 10px 30px rgba(29,38,36,.10); display: flex; flex-direction: column; z-index: 20; }
 details.menu .drop a { display: block; padding: 9px 12px; border-radius: 6px; }
+details.menu:last-child .drop { left: auto; right: 0; }   /* last menu opens leftwards so it never leaves the page */
 @media (max-width: 720px) {
   header.site .wrap { align-items: flex-start; padding-top: 10px; padding-bottom: 10px; }
   nav.main { width: 100%; }
@@ -133,12 +134,14 @@ footer.site a { color: var(--ink-2); }
 .notice .meta { color: var(--ink-3); font-size: .88rem; margin-top: 4px; }
 .notice.empty p { margin: 0; }
 @media (max-width: 600px) { .notice { grid-template-columns: 1fr; gap: 4px; } }
-.shelf { display: grid; gap: 8px 40px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.shelf { display: grid; gap: 14px 72px; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
 .shelf-item { padding: 18px 0 10px; border-top: 1px solid var(--rule); }
 .shelf-item h3 { margin: 0 0 .35em; font-size: 1.15rem; }
 .shelf-item p { font-size: .95rem; color: var(--ink-2); margin-bottom: .6em; }
 .shelf-item ul { margin: 0; padding-left: 1.1em; font-size: .93rem; }
-.shelf-item li { margin-bottom: .45em; }
+.shelf-item li { margin-bottom: .6em; }
+.shelf-item a.scholar { white-space: nowrap; font-size: .82rem; color: var(--ink-3); border-bottom-color: transparent; margin-left: .35em; }
+.shelf-item a.scholar:hover { color: var(--slate); border-bottom-color: var(--slate); }
 .linklist { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--rule); max-width: 62ch; }
 .linklist li { padding: 12px 0; border-bottom: 1px solid var(--rule); }
 .shelf-cat { font-family: var(--sans); font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; color: var(--terracotta); font-weight: 600; margin: 2.2em 0 .4em; }
