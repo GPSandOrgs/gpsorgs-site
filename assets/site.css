@@ -163,6 +163,7 @@ footer.site a { color: var(--ink-2); }
 .member { border-top: 2px solid var(--rule); padding-top: 12px; position: relative; }
 .member .who { font-family: var(--serif); font-size: 1.2rem; font-weight: 500; }
 .member .where { color: var(--ink-2); font-size: .95rem; }
+.member .where .line { display: block; }
 .member .mail-line { font-size: .9rem; margin-top: 2px; }
 .member .interests { font-size: .93rem; color: var(--ink-2); margin: .5em 0 0; }
 .member .remove { margin-top: 8px; }

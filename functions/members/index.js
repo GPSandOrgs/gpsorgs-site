@@ -5,10 +5,10 @@ import { currentUser, emailPage, signedBar, redirect } from "../../lib/members.j
 const BADGE = { steering: ["★", "Steering committee"], representative: ["◆", "Representative"] };
 function card(m, viewerIsSteering) {
   const b = BADGE[m.badge];
-  const lines = [m.affiliation, m.role, m.location].filter(Boolean).map(esc);
+  const lines = [m.affiliation, m.role, m.location].filter(Boolean).map(x => `<div class="line">${esc(x)}</div>`);
   const email = (!m.email_private || viewerIsSteering) ? `<div class="mail-line"><a href="mailto:${esc(m.email)}">${esc(m.email)}</a>${m.email_private ? ' <span class="muted small">(private, visible to the committee)</span>' : ""}</div>` : "";
   const remove = viewerIsSteering ? `<form method="post" action="/api/members/remove" class="remove" onsubmit="return confirm('Remove ${esc(m.name).replace(/'/g, "\\'")} from the registry?')"><input type="hidden" name="id" value="${m.id}"><button type="submit" class="linkbtn muted small">Remove</button></form>` : "";
-  return `<div class="member"><div class="who">${esc(m.name)}${b ? ` <span class="badge ${m.badge}" title="${b[1]}">${b[0]}</span>` : ""}</div>${lines.length ? `<div class="where">${lines.join(" · ")}</div>` : ""}${email}${m.interests ? `<p class="interests">${esc(m.interests)}</p>` : ""}${remove}</div>`;
+  return `<div class="member"><div class="who">${esc(m.name)}${b ? ` <span class="badge ${m.badge}" title="${b[1]}">${b[0]}</span>` : ""}</div>${lines.length ? `<div class="where">${lines.join("")}</div>` : ""}${email}${m.interests ? `<p class="interests">${esc(m.interests)}</p>` : ""}${remove}</div>`;
 }
 export async function onRequestGet({ request, env }) {
   const user = await currentUser(request, env);
