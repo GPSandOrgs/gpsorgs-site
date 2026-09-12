@@ -59,7 +59,7 @@ def page(fname, title, body, desc):
 </main>
 <footer class="site"><div class="wrap">
   <div>GPS &amp; Orgs Community · Geography, Place, Space and Organisations</div>
-  <div><a href="/join">Join the mailing list</a> · <a href="/contact">Contact us</a> · <a class="mail" data-u="hello" data-d="gpsorgs.com"></a></div>
+  <div><a href="/join">Join the mailing list</a> · <a href="/contact">Contact us</a></div>
 </div></footer>
 %s
 </body>
