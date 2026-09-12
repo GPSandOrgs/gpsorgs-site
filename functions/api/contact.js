@@ -29,5 +29,6 @@ export async function onRequestPost({ request, env }) {
     headers: { "Authorization": `Bearer ${env.RESEND_API_KEY}`, "Content-Type": "application/json" },
     body: JSON.stringify({ from: FROM, to: [TO], reply_to: email, subject: `[${topic}] from ${name} via gpsorgs.com`, text }),
   });
+  if (!res.ok) console.log("resend error", res.status, (await res.text()).slice(0, 500));
   return back(res.ok ? "/contacted" : "/contact-problem");
 }
