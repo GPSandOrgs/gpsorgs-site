@@ -1,0 +1,12 @@
+# Cloudflare Pages configuration for gpsorgs.com.
+# Read by Pages at build time so the D1 binding travels with the repo.
+# When the project moves to another Cloudflare account, create the database
+# there (wrangler d1 create gpsorgs-signups) and replace database_id.
+name = "gpsorgs-site"
+pages_build_output_dir = "."
+compatibility_date = "2026-09-12"
+
+[[d1_databases]]
+binding = "SIGNUPS"
+database_name = "gpsorgs-signups"
+database_id = "db32cac5-10bc-47c0-9de9-7c4b27e14496"
