@@ -10,7 +10,7 @@
 <body>
 <header class="site"><div class="wrap">
   <a class="brand" href="/"><svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15.5" fill="none" stroke="#1d2624" stroke-width="1.4"/><circle cx="17" cy="17" r="9.5" fill="none" stroke="#2f5d6b" stroke-width="1.2"/><circle cx="17" cy="17" r="4" fill="#4f6b52"/><path d="M17 1.5v6M17 26.5v6M1.5 17h6M26.5 17h6" stroke="#1d2624" stroke-width="1.2"/></svg><span><span class="name">GPS <span>&amp;</span> Orgs</span><span class="tag">Geography · Place · Space · Organisations</span></span></a>
-  <nav class="main" aria-label="Main"><a href="/" aria-current="page">Home</a><a href="/committee">Committee</a><a href="/events">Events</a><a href="/resources">Resources</a><a href="/join">Join</a></nav>
+  <nav class="main" aria-label="Main"><a href="/" aria-current="page">Home</a><details class="menu"><summary>Members</summary><div class="drop"><a href="/committee">Committee</a><a href="/members">Member registry</a></div></details><a href="/events">Events</a><details class="menu"><summary>Resources</summary><div class="drop"><a href="/resources">Community</a><a href="/readings">Readings</a><a href="/teaching">Teaching</a></div></details><details class="menu"><summary>Join</summary><div class="drop"><a href="/join">Mailing list</a><a href="/register">Register as a member</a></div></details></nav>
 </div></header>
 <main class="wrap">
 
@@ -22,7 +22,7 @@
 </section>
 <hr class="rule">
 <section class="band">
-  <h2>What this is</h2>
+  <h2>About us</h2>
   <p>Research on organisations and geography, place and space runs in many conversations at once: organisational space and spatial practice, proximity and the built environment, place and meaning, cities and regions, infrastructure, distributed and virtual work. They use different vocabularies, work at different scales, and reach well beyond management and organisation studies into architecture, urban planning, geography and sociology. Often they do not meet.</p>
   <p>This community exists to connect them. It grew out of conversations at EGOS and the Academy of Management and took shape at a first event at UCL School of Management on 7 September 2026. It is early, deliberately open, and will be shaped by the people who join it.</p>
 </section>
@@ -30,14 +30,19 @@
   <div class="grid">
     <div class="card"><h3>Meet</h3><p>Events that bring people together around the work: a day, a seminar, a walk. <a href="/events">See events</a>.</p></div>
     <div class="card"><h3>Read</h3><p>A growing set of readings, calls and related communities. <a href="/resources">Resources</a>.</p></div>
-    <div class="card"><h3>Belong</h3><p>The mailing list is the front door for now. <a href="/join">Join</a>.</p></div>
+    <div class="card"><h3>Belong</h3><p>Join the <a href="/join">mailing list</a> to hear from us, or <a href="/register">register as a member</a> to appear in the member registry.</p></div>
   </div>
 </section>
 
 </main>
 <footer class="site"><div class="wrap">
   <div>GPS &amp; Orgs Community · Geography, Place, Space and Organisations</div>
-  <div><a href="/join">Join the mailing list</a></div>
+  <div><a href="/join">Join the mailing list</a> · <a href="/contact">Contact us</a> · <a class="mail" data-u="hello" data-d="gpsorgs.com"></a></div>
 </div></footer>
+<script>
+document.querySelectorAll('a.mail').forEach(function(a){var u=a.dataset.u,d=a.dataset.d;a.href='mailto:'+u+'@'+d;if(!a.textContent.trim())a.textContent=u+'@'+d;});
+document.querySelectorAll('details.menu').forEach(function(d){d.addEventListener('toggle',function(){if(d.open)document.querySelectorAll('details.menu').forEach(function(o){if(o!==d)o.open=false;});});});
+document.addEventListener('click',function(e){if(!e.target.closest('details.menu'))document.querySelectorAll('details.menu').forEach(function(o){o.open=false;});});
+</script>
 </body>
 </html>

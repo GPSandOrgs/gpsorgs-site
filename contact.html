@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Something went wrong · GPS &amp; Orgs Community</title>
-<meta name="description" content="The sign up could not be saved.">
+<title>Contact · GPS &amp; Orgs Community</title>
+<meta name="description" content="Contact the GPS &amp; Orgs Community.">
 <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
@@ -14,8 +14,25 @@
 </div></header>
 <main class="wrap">
 
-<section class="page-title"><h1>That did not go through.</h1><p class="lede">Something stopped the sign up from saving. Please check the name and email fields and try again in a moment.</p>
-<div class="actions"><a class="btn accent" href="/join">Try again</a></div></section>
+<section class="page-title"><h1>Contact us</h1><p class="lede">Announcements you would like shared, ideas for events, feedback on the site, or anything else. Messages go to the steering committee.</p></section>
+<section class="band">
+  <form class="join" action="/api/contact" method="post">
+    <div style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+    <div class="field"><label for="topic">What is it about?</label><select id="topic" name="topic" required>
+      <option value="">Choose one</option>
+      <option>Announcement request</option>
+      <option>Event idea</option>
+      <option>Website feedback</option>
+      <option>Member registry issue</option>
+      <option>General enquiry</option>
+    </select></div>
+    <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" autocomplete="name" required></div>
+    <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required><div class="hint">So we can reply. Not stored anywhere else.</div></div>
+    <div class="field"><label for="message">Message</label><textarea id="message" name="message" rows="6" required></textarea></div>
+    <button class="btn accent" type="submit">Send</button>
+  </form>
+  <p class="small muted" style="margin-top:22px">You can also write to us directly at <a class="mail" data-u="hello" data-d="gpsorgs.com"></a>.</p>
+</section>
 
 </main>
 <footer class="site"><div class="wrap">

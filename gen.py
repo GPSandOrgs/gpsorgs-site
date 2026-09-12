@@ -1,12 +1,31 @@
 import html
 LOGO = """<svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15.5" fill="none" stroke="#1d2624" stroke-width="1.4"/><circle cx="17" cy="17" r="9.5" fill="none" stroke="#2f5d6b" stroke-width="1.2"/><circle cx="17" cy="17" r="4" fill="#4f6b52"/><path d="M17 1.5v6M17 26.5v6M1.5 17h6M26.5 17h6" stroke="#1d2624" stroke-width="1.2"/></svg>"""
-NAV = [("/","Home"),("/committee","Committee"),("/events","Events"),("/resources","Resources"),("/join","Join")]
+NAV = [
+    ("/", "Home", None),
+    ("Members", None, [("/committee", "Committee"), ("/members", "Member registry")]),
+    ("/events", "Events", None),
+    ("Resources", None, [("/resources", "Community"), ("/readings", "Readings"), ("/teaching", "Teaching")]),
+    ("Join", None, [("/join", "Mailing list"), ("/register", "Register as a member")]),
+]
 def navhtml(fname):
-    out=[]
-    for h,t in NAV:
-        cur = ' aria-current="page"' if h==('/' if fname=='index.html' else '/'+fname[:-5]) else ''
-        out.append('<a href="%s"%s>%s</a>' % (h,cur,t))
+    here = '/' if fname == 'index.html' else '/' + fname[:-5]
+    out = []
+    for a, b, kids in NAV:
+        if kids is None:
+            cur = ' aria-current="page"' if a == here else ''
+            out.append('<a href="%s"%s>%s</a>' % (a, cur, b))
+        else:
+            inside = any(h == here for h, _ in kids)
+            items = "".join('<a href="%s"%s>%s</a>' % (h, ' aria-current="page"' if h == here else '', t) for h, t in kids)
+            out.append('<details class="menu"%s><summary%s>%s</summary><div class="drop">%s</div></details>'
+                       % (' open' if False else '', ' class="current"' if inside else '', a, items))
     return "".join(out)
+# the contact address is assembled by script so it is not sitting in the page source for scrapers
+MAILJS = """<script>
+document.querySelectorAll('a.mail').forEach(function(a){var u=a.dataset.u,d=a.dataset.d;a.href='mailto:'+u+'@'+d;if(!a.textContent.trim())a.textContent=u+'@'+d;});
+document.querySelectorAll('details.menu').forEach(function(d){d.addEventListener('toggle',function(){if(d.open)document.querySelectorAll('details.menu').forEach(function(o){if(o!==d)o.open=false;});});});
+document.addEventListener('click',function(e){if(!e.target.closest('details.menu'))document.querySelectorAll('details.menu').forEach(function(o){o.open=false;});});
+</script>"""
 def page(fname, title, body, desc):
     return """<!doctype html>
 <html lang="en">
@@ -27,11 +46,12 @@ def page(fname, title, body, desc):
 </main>
 <footer class="site"><div class="wrap">
   <div>GPS &amp; Orgs Community · Geography, Place, Space and Organisations</div>
-  <div><a href="/join">Join the mailing list</a></div>
+  <div><a href="/join">Join the mailing list</a> · <a href="/contact">Contact us</a> · <a class="mail" data-u="hello" data-d="gpsorgs.com"></a></div>
 </div></footer>
+%s
 </body>
 </html>
-""" % (html.escape(title), html.escape(desc), LOGO, navhtml(fname), body)
+""" % (html.escape(title), html.escape(desc), LOGO, navhtml(fname), body, MAILJS)
 pages = {}
 pages["index.html"] = ("Home", "A community of researchers exploring organisations in relation to geography, place and space.", """
 <section class="hero">
@@ -42,7 +62,7 @@ pages["index.html"] = ("Home", "A community of researchers exploring organisatio
 </section>
 <hr class="rule">
 <section class="band">
-  <h2>What this is</h2>
+  <h2>About us</h2>
   <p>Research on organisations and geography, place and space runs in many conversations at once: organisational space and spatial practice, proximity and the built environment, place and meaning, cities and regions, infrastructure, distributed and virtual work. They use different vocabularies, work at different scales, and reach well beyond management and organisation studies into architecture, urban planning, geography and sociology. Often they do not meet.</p>
   <p>This community exists to connect them. It grew out of conversations at EGOS and the Academy of Management and took shape at a first event at UCL School of Management on 7 September 2026. It is early, deliberately open, and will be shaped by the people who join it.</p>
 </section>
@@ -50,7 +70,7 @@ pages["index.html"] = ("Home", "A community of researchers exploring organisatio
   <div class="grid">
     <div class="card"><h3>Meet</h3><p>Events that bring people together around the work: a day, a seminar, a walk. <a href="/events">See events</a>.</p></div>
     <div class="card"><h3>Read</h3><p>A growing set of readings, calls and related communities. <a href="/resources">Resources</a>.</p></div>
-    <div class="card"><h3>Belong</h3><p>The mailing list is the front door for now. <a href="/join">Join</a>.</p></div>
+    <div class="card"><h3>Belong</h3><p>Join the <a href="/join">mailing list</a> to hear from us, or <a href="/register">register as a member</a> to appear in the member registry.</p></div>
   </div>
 </section>
 """)
@@ -85,9 +105,9 @@ pages["events.html"] = ("Events", "Upcoming and past events of the GPS & Orgs Co
   </div>
 </section>
 """)
-pages["resources.html"] = ("Resources", "Announcements, calls, readings and related networks for research on organisations, geography, place and space.", """
-<section class="page-title"><h1>Resources</h1><p class="lede">A shared noticeboard and shelf for the community. Announcements and calls are posted as they come in; the reading list grows as members add to it.</p>
-<nav class="subnav" aria-label="On this page"><a href="#announcements">Announcements</a><a href="#calls">Calls and tracks</a><a href="#readings">Readings</a><a href="#networks">Related networks</a></nav></section>
+pages["resources.html"] = ("Community", "Announcements, calls and related networks for research on organisations, geography, place and space.", """
+<section class="page-title"><h1>Community</h1><p class="lede">A shared noticeboard for the community. Announcements and calls are posted as they come in. The <a href="/readings">reading list</a> has its own page.</p>
+<nav class="subnav" aria-label="On this page"><a href="#announcements">Announcements</a><a href="#calls">Calls and tracks</a><a href="#networks">Related networks</a></nav></section>
 
 <section class="band" id="announcements">
   <h2>Announcements</h2>
@@ -105,9 +125,20 @@ pages["resources.html"] = ("Resources", "Announcements, calls, readings and rela
   </div>
 </section>
 
+<section class="band" id="networks">
+  <h2>Related networks</h2>
+  <p class="muted">Existing conversations this community builds on and stays in touch with.</p>
+  <ul class="linklist">
+    <li><strong><a href="https://www.egos.org/SWGs/SWG-07">EGOS Standing Working Group 07</a></strong>, Organizations and Place-Based Communities (2025 to 2028). Sub-themes at the annual EGOS Colloquium.</li>
+    <li><strong>AOM PDW series on Organisational Spaces</strong>. Professional development workshops at the Academy of Management annual meeting.</li>
+    <li><strong><a href="https://rgcs-owee.org/">RGCS</a></strong>, the Research Group on Collaborative Spaces, and its annual symposium.</li>
+    <li><strong><a href="https://www.twrnetwork.org">TWR Network</a></strong>, the Transdisciplinary Workplace Research network: scholars and practitioners across disciplines working on workplaces and wellbeing, with a biennial conference.</li>
+  </ul>
+</section>
+""")
+pages["readings.html"] = ("Readings", "A starter reading list on organisations, geography, place and space, organised by research conversation.", """
+<section class="page-title"><h1>Readings</h1><p class="lede">A starter shelf, organised by the provisional map of research conversations drawn up at the 7 September event. The map is a working device, not a taxonomy; the boundaries are exactly what the community is here to question.</p></section>
 <section class="band" id="readings">
-  <h2>Readings</h2>
-  <p class="muted">A starter shelf, organised by the provisional map of research conversations drawn up at the 7 September event. The map is a working device, not a taxonomy; the boundaries are exactly what the community is here to question.</p>
   <h3 class="shelf-cat">Areas</h3>
   <div class="shelf">
     <div class="shelf-item"><h3>Organisational space and spatial practice</h3><p>Space as experienced, practised and socially produced, including how organisational power relations take material form.</p><ul><li>Taylor, S. and Spicer, A. (2007). Time for space: A narrative review of research on organizational spaces. <em>International Journal of Management Reviews</em>.</li><li>Migliore, A., Rossi-Lamastra, C. and Tagliaro, C. (2025). Home vs office: Does workspace design influence where academics conduct their research? <em>Research Policy</em>.</li><li>Furnari, S. (2014). Interstitial spaces: Microinteraction settings and the genesis of new practices between institutional fields. <em>Academy of Management Review</em>.</li></ul></div>
@@ -124,19 +155,13 @@ pages["resources.html"] = ("Resources", "Announcements, calls, readings and rela
   </div>
 </section>
 
-<section class="band" id="networks">
-  <h2>Related networks</h2>
-  <p class="muted">Existing conversations this community builds on and stays in touch with.</p>
-  <ul class="linklist">
-    <li><strong><a href="https://www.egos.org/SWGs/SWG-07">EGOS Standing Working Group 07</a></strong>, Organizations and Place-Based Communities (2025 to 2028). Sub-themes at the annual EGOS Colloquium.</li>
-    <li><strong>AOM PDW series on Organisational Spaces</strong>. Professional development workshops at the Academy of Management annual meeting.</li>
-    <li><strong><a href="https://rgcs-owee.org/">RGCS</a></strong>, the Research Group on Collaborative Spaces, and its annual symposium.</li>
-    <li><strong><a href="https://www.twrnetwork.org">TWR Network</a></strong>, the Transdisciplinary Workplace Research network: scholars and practitioners across disciplines working on workplaces and wellbeing, with a biennial conference.</li>
-  </ul>
-</section>
+""")
+pages["teaching.html"] = ("Teaching", "Teaching resources on organisations, geography, place and space.", """
+<section class="page-title"><h1>Teaching</h1><p class="lede">Cases, syllabi, exercises and materials for teaching organisations through geography, place and space.</p></section>
+<section class="band"><p class="placeholder">Nothing here yet. This page will grow as members share what they teach with. If you have something to contribute, <a href="/contact">get in touch</a>.</p></section>
 """)
 pages["join.html"] = ("Join", "Join the GPS & Orgs Community mailing list.", """
-<section class="page-title"><h1>Join</h1><p class="lede">For now, the community lives on its mailing list. Sign up to hear about events, calls and what members are working on.</p></section>
+<section class="page-title"><h1>Join the mailing list</h1><p class="lede">Sign up to hear about events, calls and what members are working on. If you would also like other members to be able to find you, <a href="/register">register as a member</a>.</p></section>
 <section class="band">
   <form class="join" action="/api/join" method="post">
     <div style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
@@ -156,6 +181,44 @@ pages["joined.html"] = ("You're on the list", "Thanks for joining the GPS & Orgs
 pages["join-problem.html"] = ("Something went wrong", "The sign up could not be saved.", """
 <section class="page-title"><h1>That did not go through.</h1><p class="lede">Something stopped the sign up from saving. Please check the name and email fields and try again in a moment.</p>
 <div class="actions"><a class="btn accent" href="/join">Try again</a></div></section>
+""")
+pages["members.html"] = ("Member registry", "The GPS & Orgs Community member registry, visible to signed-in members.", """
+<section class="page-title"><h1>Member registry</h1><p class="lede">Who is in the community, what they work on and where. Visible to signed-in members only.</p></section>
+<section class="band"><p class="placeholder">The registry is being built. Once it opens, members will sign in here with a code sent to their email, and those who have registered will be able to see one another.</p>
+<div class="actions"><a class="btn accent" href="/register">Register as a member</a></div></section>
+""")
+pages["register.html"] = ("Register as a member", "Register as a member of the GPS & Orgs Community.", """
+<section class="page-title"><h1>Register as a member</h1><p class="lede">Members get a profile in the <a href="/members">member registry</a>, where other members can find them and see what they work on.</p></section>
+<section class="band"><p class="placeholder">Registration is being built and will open shortly. Until then, the <a href="/join">mailing list</a> is the way to stay in touch.</p></section>
+""")
+pages["contact.html"] = ("Contact", "Contact the GPS & Orgs Community.", """
+<section class="page-title"><h1>Contact us</h1><p class="lede">Announcements you would like shared, ideas for events, feedback on the site, or anything else. Messages go to the steering committee.</p></section>
+<section class="band">
+  <form class="join" action="/api/contact" method="post">
+    <div style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+    <div class="field"><label for="topic">What is it about?</label><select id="topic" name="topic" required>
+      <option value="">Choose one</option>
+      <option>Announcement request</option>
+      <option>Event idea</option>
+      <option>Website feedback</option>
+      <option>Member registry issue</option>
+      <option>General enquiry</option>
+    </select></div>
+    <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" autocomplete="name" required></div>
+    <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required><div class="hint">So we can reply. Not stored anywhere else.</div></div>
+    <div class="field"><label for="message">Message</label><textarea id="message" name="message" rows="6" required></textarea></div>
+    <button class="btn accent" type="submit">Send</button>
+  </form>
+  <p class="small muted" style="margin-top:22px">You can also write to us directly at <a class="mail" data-u="hello" data-d="gpsorgs.com"></a>.</p>
+</section>
+""")
+pages["contacted.html"] = ("Message sent", "Your message to the GPS & Orgs Community was sent.", """
+<section class="page-title"><h1>Thank you.</h1><p class="lede">Your message is on its way to the steering committee. We reply to everything, though not always quickly.</p>
+<div class="actions"><a class="btn" href="/">Back to the front page</a></div></section>
+""")
+pages["contact-problem.html"] = ("Something went wrong", "The message could not be sent.", """
+<section class="page-title"><h1>That did not go through.</h1><p class="lede">Something stopped the message from sending. Please check the fields and try again in a moment, or email us directly at <a class="mail" data-u="hello" data-d="gpsorgs.com"></a>.</p>
+<div class="actions"><a class="btn accent" href="/contact">Try again</a></div></section>
 """)
 for f,(t,d,b) in pages.items():
     open(f,"w").write(page(f,t,b,d))
