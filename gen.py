@@ -5,10 +5,10 @@ def scholarize(block):
     """Append a Google Scholar search link to every reference in a readings block, keyed on the title."""
     def link(m):
         li = m.group(1)
-        t = re.search(r"\(\d{4}[a-z]?\)\. (.+?)\. <em>", li)          # article: title before the journal
+        t = re.search(r"\(\d{4}[a-z]?\)\. (.+?[.?!]) <em>", li)        # article: title before the journal (may end in ? or !)
         if not t: t = re.search(r"\(\d{4}[a-z]?\)\. <em>(.+?)</em>", li)  # book: title is the italic part
         if not t: return m.group(0)
-        title = html.unescape(re.sub(r"<[^>]+>", "", t.group(1)))
+        title = html.unescape(re.sub(r"<[^>]+>", "", t.group(1))).rstrip(".")
         q = urllib.parse.quote_plus('"' + title + '"')
         return '<li>%s <a class="scholar" href="https://scholar.google.com/scholar?q=%s" target="_blank" rel="noopener">Google Scholar</a></li>' % (li, q)
     return re.sub(r"<li>(.*?)</li>", link, block, flags=re.S)
