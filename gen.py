@@ -208,7 +208,7 @@ READINGS_SHELVES = """
   </div>
 </section>
 """
-READINGS_LEDE = """A starter shelf, organised by the provisional map of research conversations drawn up at the 7 September event. The map is a working device, not a taxonomy; the boundaries are exactly what the community is here to question."""
+READINGS_LEDE = """A starter shelf, organised by the provisional map of research conversations drawn up at the 7 September event. The map is a working device, not a taxonomy; the boundaries are exactly what the community is here to question. This is still being built, members are welcome to contribute: if there is work you think belongs on it, including your own, <a href="/contact">tell us</a>."""
 pages["readings.html"] = (
     "Readings",
     "A starter reading list on organisations, geography, place and space, organised by research conversation.",
