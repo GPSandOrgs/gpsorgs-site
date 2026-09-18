@@ -1,4 +1,5 @@
-import html, re, hashlib
+import html, re, hashlib, sys
+FULL = "--full" in sys.argv   # the working copy: the readings page with every reference in place
 CSSV = hashlib.sha1(open("assets/site.css","rb").read()).hexdigest()[:8]   # changes whenever the stylesheet does, so browsers never keep a stale copy
 
 import urllib.parse
@@ -13,6 +14,10 @@ def scholarize(block):
         q = urllib.parse.quote_plus('"' + title + '"')
         return '<li>%s <a class="scholar" href="https://scholar.google.com/scholar?q=%s" target="_blank" rel="noopener">Google Scholar</a></li>' % (li, q)
     return re.sub(r"<li>(.*?)</li>", link, block, flags=re.S)
+def in_development(block):
+    """The public readings page while the list is still being put together: keep every heading
+    and its descriptive line, drop the references themselves, and say the list is coming."""
+    return re.sub(r"<ul>.*?</ul>", '<p class="placeholder">List in development.</p>', block, flags=re.S)
 LOGO = """<svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15.5" fill="none" stroke="#1d2624" stroke-width="1.4"/><circle cx="17" cy="17" r="9.5" fill="none" stroke="#2f5d6b" stroke-width="1.2"/><circle cx="17" cy="17" r="4" fill="#4f6b52"/><path d="M17 1.5v6M17 26.5v6M1.5 17h6M26.5 17h6" stroke="#1d2624" stroke-width="1.2"/></svg>"""
 NAV = [
     ("/", "Home", None),
@@ -70,8 +75,9 @@ def fill(tpl, **kw):
     kw.setdefault("cssv", CSSV)
     for k, v in kw.items(): tpl = tpl.replace("{" + k + "}", v)
     return tpl
+WORKING_BAR = '<div class="signed"><div class="wrap"><span>Working copy of the site, kept for the steering committee. The readings page here carries the full reference list; the public site at <a href="https://gpsorgs.com">gpsorgs.com</a> does not yet.</span></div></div>'
 def page(fname, title, body, desc):
-    return fill(TEMPLATE, title=html.escape(title), desc=html.escape(desc), logo=LOGO, nav=navhtml(fname), bar="", body=body, script=MAILJS)
+    return fill(TEMPLATE, title=html.escape(title), desc=html.escape(desc), logo=LOGO, nav=navhtml(fname), bar=WORKING_BAR if FULL else "", body=body, script=MAILJS)
 
 # lib/shell.js: the same template and navigation for pages rendered by Functions
 import json
@@ -184,8 +190,10 @@ pages["resources.html"] = ("Community", "Announcements, calls and related networ
   </ul>
 </section>
 """)
-pages["readings.html"] = ("Readings", "A starter reading list on organisations, geography, place and space, organised by research conversation.", """
-<section class="page-title"><h1>Readings</h1><p class="lede">A starter shelf, organised by the provisional map of research conversations drawn up at the 7 September event. The map is a working device, not a taxonomy; the boundaries are exactly what the community is here to question.</p></section>
+# The full reading list: the master copy, and the place to add new references. While the list
+# is still being put together the public page shows only the headings and their descriptive
+# lines; `python3 gen.py --full` builds the working copy, with every reference in place.
+READINGS_SHELVES = """
 <section class="band" id="readings">
   <h3 class="shelf-cat">Areas</h3>
   <div class="shelf">
@@ -202,8 +210,17 @@ pages["readings.html"] = ("Readings", "A starter reading list on organisations, 
     <div class="shelf-item"><h3 class="placeholder">Further methods to add</h3><p class="placeholder">Mapping and GIS, ethnographies of place, spatial network analysis, and more, as members contribute.</p></div>
   </div>
 </section>
-
-""")
+"""
+READINGS_LEDE_FULL = """A starter shelf, organised by the provisional map of research conversations drawn up at the 7 September event. The map is a working device, not a taxonomy; the boundaries are exactly what the community is here to question."""
+READINGS_LEDE = """The provisional map of research conversations drawn up at the 7 September event. The map is a working device, not a taxonomy; the boundaries are exactly what the community is here to question. The readings that will sit under each heading are being put together now, and members will be asked to contribute: if there is work you think belongs on this shelf, including your own, <a href="/contact">tell us</a>."""
+pages["readings.html"] = (
+    "Readings",
+    "A map of research conversations on organisations, geography, place and space. The reading list under each heading is in development."
+      if not FULL else
+    "A starter reading list on organisations, geography, place and space, organised by research conversation.",
+    '<section class="page-title"><h1>Readings</h1><p class="lede">%s</p></section>\n%s\n'
+      % (READINGS_LEDE_FULL if FULL else READINGS_LEDE,
+          scholarize(READINGS_SHELVES) if FULL else in_development(READINGS_SHELVES)))
 pages["teaching.html"] = ("Teaching", "Teaching resources on organisations, geography, place and space.", """
 <section class="page-title"><h1>Teaching</h1><p class="lede">Cases, syllabi, exercises and materials for teaching organisations through geography, place and space.</p></section>
 <section class="band"><p class="placeholder">Nothing here yet. This page will grow as members share what they teach with. If you have something to contribute, <a href="/contact">get in touch</a>.</p></section>
@@ -259,7 +276,6 @@ pages["contact-problem.html"] = ("Something went wrong", "The message could not 
 <section class="page-title"><h1>That did not go through.</h1><p class="lede">Something stopped the message from sending. Please check the fields and try again in a moment, or email us directly at <a class="mail" data-u="hello" data-d="gpsorgs.com"></a>.</p>
 <div class="actions"><a class="btn accent" href="/contact">Try again</a></div></section>
 """)
-pages["readings.html"] = (pages["readings.html"][0], pages["readings.html"][1], scholarize(pages["readings.html"][2]))
 for f,(t,d,b) in pages.items():
     open(f,"w").write(page(f,t,b,d))
 print("pages:", ", ".join(pages))
