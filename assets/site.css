@@ -101,10 +101,10 @@ section.band { padding: 16px 0 40px; }
 .event .when small { display: block; font-family: var(--sans); font-size: .8rem; color: var(--ink-3); margin-top: 4px; }
 .event h3 { margin: 0 0 .3em; }
 .event .where { color: var(--ink-3); font-size: .92rem; margin-bottom: .6em; }
-.photo { margin: 0 0 1.1em; }
+.photo { margin: 0 0 1.1em; max-width: 75%; }
 .photo img { display: block; width: 100%; height: auto; border-radius: 2px; }
 .photo figcaption { font-size: .85rem; color: var(--ink-3); margin-top: 6px; }
-@media (max-width: 600px) { .event { grid-template-columns: 1fr; gap: 6px; } }
+@media (max-width: 600px) { .event { grid-template-columns: 1fr; gap: 6px; } .photo { max-width: 100%; } }
 
 /* forms */
 form.join { max-width: 520px; }

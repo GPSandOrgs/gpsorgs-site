@@ -155,7 +155,7 @@ pages["events.html"] = ("Events", "Upcoming and past events of the GPS & Orgs Co
       <div class="where">UCL School of Management, London</div>
       <p>The first meeting. A day bringing together researchers from organisation studies and the spatial disciplines: a panel mapping the research areas, roundtables on a shared phenomenon, a panel on methods and data sources, and a closing session on future research agendas and the community itself.</p>
       <figure class="photo">
-        <img src="/assets/2026-09-07-first-meeting-900.jpg" srcset="/assets/2026-09-07-first-meeting-900.jpg 900w, /assets/2026-09-07-first-meeting-1800.jpg 1800w" sizes="(max-width: 600px) 92vw, 890px" width="900" height="365" loading="lazy" alt="Researchers seated around tables in a top-floor room at UCL School of Management, listening to a speaker at the lectern, with the London skyline through the windows.">
+        <img src="/assets/2026-09-07-first-meeting-900.jpg" srcset="/assets/2026-09-07-first-meeting-900.jpg 900w, /assets/2026-09-07-first-meeting-1800.jpg 1800w" sizes="(max-width: 600px) 92vw, 670px" width="900" height="365" loading="lazy" alt="Researchers seated around tables in a top-floor room at UCL School of Management, listening to a speaker at the lectern, with the London skyline through the windows.">
       </figure>
       <p class="small muted">Organised by Jen Rhymer (UCL), Alessandra Migliore (Politecnico di Milano) and Santi Furnari (Bayes Business School).</p>
     </div>
