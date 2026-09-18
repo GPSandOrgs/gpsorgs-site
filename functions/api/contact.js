@@ -6,7 +6,7 @@
 
 const TO = "gpsandorgs@gmail.com";
 const FROM = "GPS & Orgs website <no-reply@gpsorgs.com>";
-const TOPICS = new Set(["Announcement request", "Event idea", "Website feedback", "Member registry issue", "General enquiry"]);
+const TOPICS = new Set(["Resource contribution", "Event idea", "Website feedback", "Member registry issue", "General enquiry"]);
 const EMAIL = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 const clean = (v, max) => String(v ?? "").replace(/\r\n?/g, "\n").trim().slice(0, max);
 

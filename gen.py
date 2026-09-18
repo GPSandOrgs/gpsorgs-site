@@ -208,7 +208,7 @@ READINGS_SHELVES = """
   </div>
 </section>
 """
-READINGS_LEDE = """A starter shelf, organised by the provisional map of research conversations drawn up at the 7 September event. The map is a working device, not a taxonomy; the boundaries are exactly what the community is here to question. This is still being built, members are welcome to contribute: if there is work you think belongs on it, including your own, <a href="/contact">tell us</a>."""
+READINGS_LEDE = """A starter shelf, organised by the provisional map of research conversations drawn up at the 7 September event. The map is a working device, not a taxonomy; the boundaries are exactly what the community is here to question. This is still being built and members are welcome to contribute: if there is work you think belongs on it, including your own, <a href="/contact">tell us</a>."""
 pages["readings.html"] = (
     "Readings",
     "A starter reading list on organisations, geography, place and space, organised by research conversation.",
@@ -247,7 +247,7 @@ pages["contact.html"] = ("Contact", "Contact the GPS & Orgs Community.", """
     <div style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
     <div class="field"><label for="topic">What is it about?</label><select id="topic" name="topic" required>
       <option value="">Choose one</option>
-      <option>Announcement request</option>
+      <option>Resource contribution</option>
       <option>Event idea</option>
       <option>Website feedback</option>
       <option>Member registry issue</option>
