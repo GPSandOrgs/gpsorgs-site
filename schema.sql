@@ -49,3 +49,9 @@ CREATE TABLE IF NOT EXISTS sessions (
   expires    TEXT NOT NULL
 );
 CREATE INDEX IF NOT EXISTS sessions_email ON sessions (email);
+
+-- ---- member list choices (added 29 Sep 2026) ----
+-- What the member ticked for the general mailing list and volunteering. NULL = registered before
+-- this was recorded. Applied once with:
+--   wrangler d1 execute gpsorgs-signups --remote --file migrations/2026-09-29-member-ticks.sql
+-- (fresh databases: run that file after this one)

@@ -27,5 +27,10 @@ export async function onRequestPost({ request, env }) {
       .bind(t, name, user.email, p.affiliation, p.interests).run();
   }
   if (form.get("volunteer")) await env.SIGNUPS.prepare("UPDATE signups SET volunteer = 1 WHERE lower(email) = ?").bind(user.email).run();
+  // record the ticks on the member row: registration stores both answers; later edits only ever set a tick
+  // (the edit form shows both boxes unticked, so an untick there means "no change", not "no")
+  const mailing = form.get("mailing") ? 1 : 0, volunteer = form.get("volunteer") ? 1 : 0;
+  if (isNew) await env.SIGNUPS.prepare("UPDATE members SET mailing = ?, volunteer = ? WHERE email = ?").bind(mailing, volunteer, user.email).run();
+  else if (mailing || volunteer) await env.SIGNUPS.prepare("UPDATE members SET mailing = MAX(COALESCE(mailing, 0), ?), volunteer = MAX(COALESCE(volunteer, 0), ?) WHERE email = ?").bind(mailing, volunteer, user.email).run();
   return redirect(request, "/members?saved");
 }
